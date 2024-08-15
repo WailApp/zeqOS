@@ -1,1 +1,82 @@
-Repair System|zeqOS will be upgraded to a newer version, and errors will be fixed.|Important
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zeqOS Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .update-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>zeqOS Update Checker</h1>
+        <form id="updateForm">
+            <label for="buildNumber">Enter Build Number:</label>
+            <input type="text" id="buildNumber" name="buildNumber" required>
+            <button type="submit">Check for Updates</button>
+        </form>
+        <div id="updateInfo" class="update-info hidden">
+            <h2>Update Information</h2>
+            <p id="updateName"></p>
+            <p id="updateChangelog"></p>
+            <p id="updateCategory"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            // Get the build number from the form
+            var buildNumber = document.getElementById('buildNumber').value;
+            
+            // Define the update information based on the build number
+            var updateInfo;
+            if (buildNumber === '1.0') {
+                updateInfo = {
+                    name: 'zeqOS 1.0 Update',
+                    changelog: 'Bug fixes and performance improvements',
+                    category: 'Important'
+                };
+            } else if (buildNumber === '2.0') {
+                updateInfo = {
+                    name: 'zeqOS 2.0 Update',
+                    changelog: 'Major new features and improvements',
+                    category: 'Important'
+                };
+            } else {
+                updateInfo = {
+                    name: 'No new updates',
+                    changelog: 'You\'re up to date! Try checking for updates later.',
+                    category: 'Up-to-date'
+                };
+            }
+            
+            // Display the update information
+            document.getElementById('updateName').textContent = 'Update Name: ' + updateInfo.name;
+            document.getElementById('updateChangelog').textContent = 'Changelog: ' + updateInfo.changelog;
+            document.getElementById('updateCategory').textContent = 'Category: ' + updateInfo.category;
+            
+            // Show the update information section
+            document.getElementById('updateInfo').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
